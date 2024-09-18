@@ -1,24 +1,22 @@
 package homework3.ex5;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class Runner {
     public static void main(String[] args) {
         Comparator<Feedback> feedbackComparator = (feedback1, feedback2) -> {
-            if (feedback1.getLikes() > feedback2.getLikes()) {
+            if (feedback1.getLikes() < feedback2.getLikes()) {
                 return 1;
-            } else if (feedback1.getLikes() < feedback2.getLikes()) {
+            } else if (feedback1.getLikes() > feedback2.getLikes()) {
                 return -1;
-            } else if (feedback1.getDate().isAfter(feedback2.getDate())) {
-                return 1;
             } else if (feedback1.getDate().isBefore(feedback2.getDate())) {
-                return -1;
-            } else if (feedback1.getId() > feedback2.getId()) {
                 return 1;
-            } else if (feedback1.getId() < feedback2.getLikes()) {
+            } else if (feedback1.getDate().isAfter(feedback2.getDate())) {
+                return -1;
+            } else if (feedback1.getId() < feedback2.getId()) {
+                return 1;
+            } else if (feedback1.getId() > feedback2.getLikes()) {
                 return -1;
             }
             return 0;
@@ -35,11 +33,9 @@ public class Runner {
                         LocalDateTime.of(2024, 1, 25, 13, 37))
         );
 
-        List<Feedback> feedbackList = new ArrayList<>(feedbacks);
+        Set<Feedback> feedbackSorted = new TreeSet<>(feedbackComparator);
+        feedbackSorted.addAll(feedbacks);
 
-        feedbackList.sort(feedbackComparator);
-
-        System.out.println(feedbackList);
-
+        System.out.println(feedbackSorted);
     }
 }
