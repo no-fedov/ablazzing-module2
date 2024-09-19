@@ -22,6 +22,12 @@ public class Runner {
             return 0;
         };
 
+        Comparator<Feedback> comparatorForFeedbacks = Comparator.comparing(Feedback::getLikes)
+                .thenComparing(Feedback::getDate)
+                .thenComparing(Feedback::getId)
+                .reversed();
+
+
         List<Feedback> feedbacks = List.of(
                 new Feedback(1, "отличный товар", 200,
                         LocalDateTime.of(2024, 1, 25, 13, 37)),
@@ -35,7 +41,10 @@ public class Runner {
 
         Set<Feedback> feedbackSorted = new TreeSet<>(feedbackComparator);
         feedbackSorted.addAll(feedbacks);
-
         System.out.println(feedbackSorted);
+
+        Set<Feedback> sortedFeedbacks = new TreeSet<>(comparatorForFeedbacks);
+        sortedFeedbacks.addAll(feedbacks);
+        System.out.println(sortedFeedbacks);
     }
 }
