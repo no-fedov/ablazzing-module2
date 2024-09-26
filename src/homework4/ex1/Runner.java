@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Runner {
+    private static final int FIRST_NUMBER = 0;
     private static final int CAR_GENERATE_COUNT = 50;
     private static final String NUMBER_TEMPLATE_1 = "а%03dан799";
     private static final String NUMBER_TEMPLATE_2 = "к%03dсе178";
@@ -20,11 +21,12 @@ public class Runner {
 
         Stream.concat(cars1.stream(), cars2.stream())
                 .filter(car -> Pattern.matches(PATTERN, car.getNumber()))
+                .map(Car::getNumber)
                 .forEach(System.out::println);
     }
 
     private static Set<Car> generateCarsWithNumber(int carCount, String numberTemplate) {
-        AtomicInteger number = new AtomicInteger(0);
+        AtomicInteger number = new AtomicInteger(FIRST_NUMBER);
         return Stream.generate(() -> new Car(
                                 String.format(numberTemplate, number.addAndGet(1))
                         )
