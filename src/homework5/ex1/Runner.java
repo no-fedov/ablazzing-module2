@@ -38,7 +38,7 @@ public class Runner {
 
     private static void robBank(Thief thief, Bank bank) throws NoSuchMethodException,
             InvocationTargetException, IllegalAccessException {
-        Method stealMoney = Thief.class.getDeclaredMethod(METHOD_NAME_THIEF_STEAL_MONEY, Bank.class);
+        Method stealMoney = thief.getClass().getDeclaredMethod(METHOD_NAME_THIEF_STEAL_MONEY, bank.getClass());
         stealMoney.setAccessible(true);
         stealMoney.invoke(thief, bank);
         stealMoney.setAccessible(false);
