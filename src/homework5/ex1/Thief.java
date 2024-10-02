@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 
+import static java.math.BigDecimal.ZERO;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
@@ -15,7 +16,7 @@ public class Thief {
     private BigDecimal money;
 
     private Thief() {
-        this.money = BigDecimal.ZERO;
+        this.money = ZERO;
     }
 
     private void stealMoney(Bank bank) throws IllegalAccessException, NoSuchFieldException,
@@ -57,7 +58,7 @@ public class Thief {
         Method setMoneyToBank = bank.getClass()
                 .getDeclaredMethod(METHOD_NAME_BANK_SET_MONEY, BigDecimal.class);
         setMoneyToBank.setAccessible(true);
-        setMoneyToBank.invoke(bank, BigDecimal.ZERO);
+        setMoneyToBank.invoke(bank, ZERO);
         setMoneyToBank.setAccessible(false);
     }
 }
